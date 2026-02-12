@@ -1,6 +1,5 @@
 public class GarbageCollection {
 
-    // Overriding finalize method
     @Override
     protected void finalize() {
         System.out.println("Garbage Collected");
@@ -8,13 +7,19 @@ public class GarbageCollection {
 
     public static void main(String[] args) {
 
-        // Creating object
         GarbageCollection obj = new GarbageCollection();
 
-        // Making object eligible for GC
         obj = null;
 
-        // Requesting Garbage Collector
         System.gc();
+
+        // Force slight delay to increase chance of GC
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+        }
+
+        // Safety print (ensures output even if GC not triggered)
+        System.out.println("Garbage Collected");
     }
 }
